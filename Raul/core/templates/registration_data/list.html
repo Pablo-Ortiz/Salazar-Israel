@@ -1,0 +1,41 @@
+{% load static %}
+
+{% include 'main/main.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Datos</title>
+</head>
+    <div class="table-responsive mt-5">
+        {% if user.username == request.user.username %}
+        <table class="table table-bordered table-hover" id="no-more-tables">
+            <thead>
+                <tr>
+                    <th scope="row" colspan="5" class="text-center">Información del Vehículo</th>
+                </tr>
+                <th scope="col">Id Consulta</th>
+                <th scope="col">Patente</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Estado</th>
+            </thead>
+            {% for n in list %}
+            {% if user.username == n.cliente.username %}
+            <tbody>
+                <tr>
+                    <td data-title="Id Consulta">{{n.id}}</td>
+                    <td data-title="Patente">{{n.patente}}</td>
+                    <td data-title="Modelo">{{n.modelo}}</td>
+                    <td data-title="Cliente">{{n.cliente}}</td>
+                    <td data-title="Estado">{{n.estado}}</td>
+                </tr>
+            </tbody>
+            {% endif %}
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>

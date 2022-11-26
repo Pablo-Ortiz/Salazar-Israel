@@ -1,0 +1,16 @@
+{%load static%}
+
+{% include 'main/main.html' %}
+
+<head>
+    <title>Salazar Israel</title>
+</head>
+<div>
+    <div class="container">
+        <h1>Atención al Cliente</h1>
+        <p>Si tienes alguna otra duda de algún otro tipo, dirijase al apartado de preguntas frecuentes</p>
+        <div class="my-4">
+            <a href="{% url 'list' request.user.username %}" class="w-100 btn btn-lg btn-primary"> Revisar el estado de mi vehículo </a>   
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <main>
+        <header class="px-5 pb-5">
+            <div class="main-header">
+                <div class="d-flex justify-content-between me-2" style="width: 50%;">
+                    <a href="#">Nuevos</a>
+                    <a href="#">Usados</a>
+                    <a href="#">Compramos tu auto</a>
+                    <a href="#">Venta de Empresa</a>
+                </div>
+                <img class="mx-4" src="{% static 'img/logo.png' %}" alt="">
+                <div class="d-flex justify-content-between ms-2" style="width: 50%;">
+                    <a href="#">Servicio Técnico</a>
+                    <a href="#">Accesorios y Repuestos</a>
+                    <a href="#">Atención al Cliente</a>
+                    <a href="#">Sucrusales</a>
+                {% if user.is_authenticated %}
+                <div class="dropdown text-end">
+                    <a href="#" class="nav-link link-dark text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li class="nav-item d-flex justify-content-center align-items-center">
+                            <a href="{% url 'profile' request.user.username %}" class="dropdown-item">Mi
+                                perfil</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}">
+                                Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                {% endif %}
+            </div>
+        </header>
+    </main>
+</body>
+</html>

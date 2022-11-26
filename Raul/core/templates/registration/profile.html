@@ -1,0 +1,82 @@
+{% load static %}
+{% include 'main/main.html' %}	
+
+<link rel="stylesheet" href="{% static 'css/tables.css' %}">
+
+<!-- Profile -->
+
+<body class="text-center">
+	<div class="container">
+		
+		<div class="profile">
+			<div class="table-responsive" id="no-more-tables">
+			{% if request.user.is_authenticated %}
+			{% if user.username == request.user.username %}
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th scope="row" colspan="4" class="text-center">Perfil</th>
+					</tr>
+					<th scope="col">Nombre de usuario</th>
+					<th scope="col">Correo</th>
+					<th scope="col">Contraseña</th>
+					<th scope="col">Grupo</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td data-title="Nombre de usuario">{{ user.username }}</td>
+						<td data-title="Correo">{{ user.email }}</td>
+						<td data-title="Contraseña"><a href="/admin/password_change/">Cambiar contraseña</a></td>
+						<td data-title="Grupo">
+							{% for n in auto %}
+							<ul>
+								<li>{{n.cliente.nombre}}</li>
+							</ul>
+							{% endfor %}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			<p>{{ user.username }}</p>
+			<p>{{ user.email }}</p>
+			<p>{{ request.user.group }}</p>
+
+			
+				<p>Mostrando todos los grupos: </p>
+			
+			{% else %}
+			<p>No estoy logueado</p>
+			{% endif %}
+			{% endif %}
+		</div>
+		<div>
+			{% for n in request.user.groups.all %}
+				<p>Grupo: {{n.name}}</p>
+			{% endfor %}
+		</div>
+		<table class="table table-bordered table-hover" id="no-more-tables">
+            <thead>
+                <tr>
+                    <th scope="row" colspan="5" class="text-center">Lista de Comisiones</th>
+                </tr>
+                <th scope="col">Id Consulta</th>
+                <th scope="col">Patente</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Estado</th>
+            </thead>
+            {% for n in list %}
+            <tbody>
+                <tr>
+                    <td data-title="Id Consulta">{{n.id}}</td>
+                    <td data-title="Patente">{{n.patente}}</td>
+                    <td data-title="Modelo">{{n.modelo}}</td>
+                    <td data-title="Cliente">{{n.cliente.nombre}} {{n.nombreVendedor.apellido}}</td>
+                    <td data-title="Estado">{{n.estado}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+	</div>
+</body>
